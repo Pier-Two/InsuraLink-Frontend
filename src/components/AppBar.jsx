@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import Logo from "../img/SDL_Logo_Header.png";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import '../css/Nav.css';
+import IERC20 from "../contracts/IERC20.json";
+import contract_config from "../contract_config.json";
 
 class CustomAppBar extends Component {
   state = {
@@ -18,6 +20,16 @@ class CustomAppBar extends Component {
   handleChange = (event) => {
     this.setState({ selectedTab: event.target.value })
   }
+
+  depositDAI = async () => {
+    var web3 = this.props.web3;
+    var contract = new web3.eth.Contract(IERC20.abi, contract_config.dai_dev);
+    var account = (await this.props.web3.eth.getAccounts())[0]
+    this.setState({web3: web3, contract: contract, account: account})
+    console.log(account)
+    await contract.methods.approve(contract_config.insuralink_dev, web3.utils.toWei("100")).send({from: account})
+  }
+
 
   render() {
     return (
@@ -42,6 +54,7 @@ class CustomAppBar extends Component {
                 <ListItem label="Inputs" to='/inputs' component={Link} className = "link">
                   <Typography variant="subtitle2"> Inputs </Typography>
                 </ListItem>
+                  <Button onClick={() => {this.depositDAI()}}> Deposit DAI </Button>
               </List>
             </Toolbar>
         </AppBar>

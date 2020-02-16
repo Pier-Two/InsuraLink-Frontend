@@ -73,11 +73,14 @@ class MainPage extends Component {
     var numberOfTemplates = await contract.methods.templateCounter().call()
     var templates = []
     for (var i = 0; i < numberOfTemplates; i++) {
+      console.log(numberOfTemplates)
       var thisTemplate = await contract.methods.getContractTemplate(i).call()
-      if (thisTemplate[4] < Math.round((new Date()).getTime() / 1000)) {
-        //Activre template
-        templates.push(thisTemplate)
-      }
+      //TODO
+      // if (thisTemplate[4] < Math.round((new Date()).getTime() / 1000)) {
+      //   //Activre template
+      //   templates.push(thisTemplate)
+      // }
+      templates.push(thisTemplate)
     }
     console.log(templates)
     this.setState({ templateData: templates })
@@ -106,6 +109,7 @@ class MainPage extends Component {
     var web3 = this.props.web3;
     var contract = new web3.eth.Contract(insuralink.abi, contract_config.insuralink_dev);
     var account = (await this.props.web3.eth.getAccounts())[0]
+    console.log(this.state.contractData[6])
     await contract.methods.buyContract(this.state.contractData[6]).send({ from: account })
   }
 
@@ -130,10 +134,10 @@ class MainPage extends Component {
         <div>
           <Grid container xs={12} spacing={2} justify="center" alignItems="center" style={{ width: '100%' }}>
             <Grid item xs={4} style={{ paddingTop: 0, paddingLeft: "5%", height: '70vh' }}>
-              <CreateContractInput />
+              <CreateContractInput {...this.props}/>
             </Grid>
             <Grid item xs={8} style={{ paddingTop: 0, height: '70vh' }}>
-              <InputDetails />
+              <InputDetails {...this.props}/>
             </Grid>
           </Grid>
         </div>

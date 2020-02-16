@@ -31,7 +31,7 @@ class MainPage extends Component {
   render() {
       return (
         <div>
-          <AppBar/>
+          <AppBar {...this.props} />
           <div onClick={this.inputs} style={{position: "absolute", cursor: "pointer", float: "left",height: "100%", width: "30vw"}}>
           </div>
           <DiagramTree/>

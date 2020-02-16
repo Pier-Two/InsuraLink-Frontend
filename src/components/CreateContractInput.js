@@ -56,7 +56,8 @@ class CreateContractInput extends Component {
         console.log(contract.methods)
 
         // call create contract function //todo add in ability to set contract expiry time
-        contract.methods.createInsuranceContractTemplate(1, this.state.payments, this.state.insuranceAmount,
+        contract.methods.createInsuranceContractTemplate(this.props.web3.utils.toWei(this.state.payments.toString()),
+            this.props.web3.utils.toWei(this.state.insuranceAmount.toString()),
             this.state.active, this.state.contractType, this.state.numPayments).send({ from: account })
             .on('transactionHash', (hash) => {
                 //Set Status as pending and wait for this transaction to be processed
