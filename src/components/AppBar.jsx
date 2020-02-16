@@ -36,8 +36,8 @@ class CustomAppBar extends Component {
                   label="Home" to='/marketplace' component={Link} className = "link">
                   <Typography variant="subtitle2"> Market Place </Typography>
                 </ListItem>
-                <ListItem label="Home" to='/create' component={Link} className = "link">
-                  <Typography variant="subtitle2"> Create Contract </Typography>
+                <ListItem label="Home" to='/pizza' component={Link} className = "link">
+                  <Typography variant="subtitle2"> Order Pizza </Typography>
                 </ListItem>
                 <ListItem label="Inputs" to='/inputs' component={Link} className = "link">
                   <Typography variant="subtitle2"> Inputs </Typography>

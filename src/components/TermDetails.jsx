@@ -48,7 +48,8 @@ class TermDetails extends Component {
     }
 
     getPaperContent = () => {
-        if (this.props.contractData === null) {
+        var data = this.props.contractData
+        if (data === null || data === undefined) {
             return (
                 <div>
                     <Typography> No Contract Selected </Typography>
@@ -56,8 +57,6 @@ class TermDetails extends Component {
                 </div>
             )
         } else {
-            var data = this.props.contractData
-            console.log(data)
             return (
                 <div>
                     <div style={{ flexDirection: 'column', display: 'flex', alignItems: 'flex-start', marginLeft: '10px', marginBottom: '15px' }}>
@@ -84,6 +83,7 @@ class TermDetails extends Component {
                         </Button>
                 </div>
             )
+            
         }
     }
 
