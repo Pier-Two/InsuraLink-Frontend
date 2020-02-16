@@ -50,11 +50,8 @@ class CreateContractForm extends Component {
         var contract = new web3.eth.Contract(insuralink.abi, contract_config.insuralink_dev);
         console.log(contract)
         var account = (await this.props.web3.eth.getAccounts())[0]
-<<<<<<< HEAD
-=======
         console.log(contract.methods)
 
->>>>>>> 0a8bce7d4ef6a2d3721386905d43c0c426d117f3
         // call create contract function //todo add in ability to set contract expiry time
         contract.methods.createInsuranceContractTemplate(1, this.state.pAmount, this.state.iAmount,
             this.state.validLength, this.state.description ,this.state.total).send({ from: account })

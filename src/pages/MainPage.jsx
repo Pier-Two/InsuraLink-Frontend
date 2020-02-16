@@ -20,7 +20,9 @@ class MainPage extends Component {
     
   }
 
-
+  inputs = () => {
+    this.props.history.push('/inputs')
+  }
 
   handleClose = () => {
     this.setState({ showPopup: false })
@@ -30,6 +32,8 @@ class MainPage extends Component {
       return (
         <div>
           <AppBar/>
+          <div onClick={this.inputs} style={{position: "absolute", cursor: "pointer", float: "left",height: "100%", width: "30vw"}}>
+          </div>
           <DiagramTree/>
         </div>
       )
