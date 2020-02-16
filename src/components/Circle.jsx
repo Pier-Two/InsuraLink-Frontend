@@ -26,6 +26,7 @@ class Circle extends Component {
             <div style={circleStyle}>
                 <div style={{ paddingTop: "10%" }}>
                     {this.props.data}
+                    <img src={this.props.image} style={{ width: "100%", height:"100%"}}></img>
                 </div> 
             </div>
         );
