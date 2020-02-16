@@ -46,7 +46,6 @@ class InputsDisplay extends Component {
             });
             }
         ) 
-        this.forceUpdate();
     }
 
     componentDidMount = async () => {

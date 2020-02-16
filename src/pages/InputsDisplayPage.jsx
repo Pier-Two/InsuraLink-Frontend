@@ -24,7 +24,7 @@ class CreateContractPage extends Component {
 
   render() {
       return (
-        <div>
+        <div style={{height:'100vh'}}>
           <AppBar/>
           <Grid style={{ paddingTop: "3%" }}>
             <Typography variant="h4" style={{ color: "#f0f0f0"}}> Live Sensor Data </Typography>

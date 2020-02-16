@@ -19,7 +19,7 @@ const StyledTableCell = withStyles(theme => ({
       color: theme.palette.common.black,
     },
     body: {
-      fontSize: 11,
+      fontSize: 10,
     },
   }))(TableCell);
   
@@ -37,18 +37,26 @@ class InputsDisplay extends Component {
 
     componentDidMount = async () => {
         this.setState({ type: this.props.type, mainRecord: this.props.data})
-        var joined = this.state.previous.concat(this.props.data)
-        this.setState({ previous: joined })
+        // var joined = this.state.previous.concat(this.props.data)
+        // this.setState({ previous: joined })
         console.log(this.props.data)
+    }
+
+    componentDidUpdate = () => {
+        console.log(this.props)
+        if (this.state.previous.length >= 3) {
+            this.state.previous = this.state.previous.slice(1, 4)
+        }
+        this.state.previous.push(this.props.data)
     }
     
 
     render() {
             return (
                 <div>
-                    <Grid className="container" alignItems="inline" style={{ height: "50%", width: "100%"}}>
+                    <Grid className="container" alignItems="inline" style={{ height: "100%", width: "100%"}}>
                         
-                        <Circle data={this.state.mainRecord} />
+                        <Circle data={this.props.data} />
                         <div style={{float: "right", paddingRight: "20%"}}>
                             <div style={{ flexDirection: 'column', display: 'flex', alignItem:'flex-start', marginLeft: '10px', marginBottom: '15px'}}>
                                 <Typography style={{color: "white"}}> {this.state.type} </Typography>
@@ -56,15 +64,13 @@ class InputsDisplay extends Component {
                             <Table className="table" aria-label="customized table">
                             <TableHead className="table-head">
                                 <StyledTableRow>
-                                    <StyledTableCell>Time</StyledTableCell>
-                                    <StyledTableCell>Recording</StyledTableCell>
+                                    <StyledTableCell>Historical</StyledTableCell>
                                 </StyledTableRow>
                             </TableHead>
                             <TableBody>
                                 {this.state.previous.map(row => (
                                     <StyledTableRow key={row.id}>
-                                        <StyledTableCell>Time</StyledTableCell>
-                                        <StyledTableCell>{row.tilt}</StyledTableCell>
+                                        <StyledTableCell>{row}</StyledTableCell>
                                     </StyledTableRow>
                                 ))}
                             </TableBody>
