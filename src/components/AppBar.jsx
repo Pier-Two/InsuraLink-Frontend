@@ -43,7 +43,7 @@ class CustomAppBar extends Component {
                   <Typography variant="subtitle2"> Inputs </Typography>
                 </ListItem>
                 <ListItem className="link"> 
-                  <button style={{ color: "white", border: "none", backgroundColor: "#796b4d" }}>
+                  <button style={{ color: "white", border: "none", backgroundColor: "#caaf72" }}>
                   Connect to Network
                   </button>
                 </ListItem>

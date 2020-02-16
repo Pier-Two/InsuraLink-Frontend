@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AppBar from "../components/AppBar";
 import CenteredTree from "../components/CenteredTree"
-import TestTree from "../components/TestTree"
+import DiagramTree from "../components/DiagramTree"
 // import linkTRS from "../contracts/LinkTRS";
 // import token from "../contracts/TestDAI";
 // import demoAggregator from "../contracts/DemoAggregator";
@@ -30,7 +30,7 @@ class MainPage extends Component {
       return (
         <div>
           <AppBar/>
-          <TestTree/>
+          <DiagramTree/>
         </div>
       )
   }

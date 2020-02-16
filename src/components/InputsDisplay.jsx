@@ -13,17 +13,12 @@ import { PulseLoader } from 'react-spinners';
 import "../css/Grid.css";
 import IndividualInputDisplay from './IndividualInputDisplay';
 
-String.prototype.format = function () {
-    var a = this;
-    for (var k in arguments) {
-        a = a.replace(new RegExp("\\{" + k + "\\}", 'g'), arguments[k]);
-    }
-    return a
-}
-
 class InputsDisplay extends Component {
     state = {
-        isLoaded: false
+        isLoaded: false,
+        refresh: false,
+        previous:[]
+
     }
 
     get_data = async () => {
@@ -31,15 +26,15 @@ class InputsDisplay extends Component {
         .then(res => res.json())
         .then(
             (result) => {
-            var acc = "({0}, {1}, {2})".format(result.accelerometer.x, result.accelerometer.y, result.accelerometer.z)
             this.setState({
                 isLoaded: true,
                 results: result,
                 temp: result.temperature,
                 humidity: result.humidity,
-                accelerometer: acc
+                tilt: result.tilt,
+                
             });
-            console.log(result)
+            console.log(this.state)
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -50,20 +45,15 @@ class InputsDisplay extends Component {
                 error: true
             });
             }
-        )
+        ) 
+        this.forceUpdate();
     }
 
     componentDidMount = async () => {
         await this.get_data()
-        console.log(this.state)
         setInterval(this.get_data, 5000)
     }
     
-
-    handleClick = async (address) => {
-        
-    }
-
 
     render() {
         if (!this.state.isLoaded) {
@@ -81,16 +71,16 @@ class InputsDisplay extends Component {
                 <div>
                     <div className="grid2x2">
                         <div className="box">
-                            <IndividualInputDisplay type={"humidity"} data={this.state.humidity}/>
+                            <IndividualInputDisplay type={"Humidity"} data={this.state.humidity}/>
                         </div>
                         <div className="box">
-                            <IndividualInputDisplay type={"accelerometer"} data={this.state.accelerometer}/>
+                            <IndividualInputDisplay type={"Tilt"} data={this.state.tilt}/>
                         </div>
                         <div className="box">
-                            <IndividualInputDisplay type={"temp"} data={this.state.temp}/>
+                            <IndividualInputDisplay type={"Temperature (deg)"} data={this.state.temp}/>
                         </div>
                         <div className="box">
-                            <IndividualInputDisplay type={"humidity"} data={this.state.humidity}/>
+                            <IndividualInputDisplay type={"Judge Happiness (%)"} data={100}/>
                         </div>
                     </div>
                 </div>

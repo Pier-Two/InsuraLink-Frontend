@@ -14,7 +14,6 @@ code {
 }
 
 html, body {
-  background-image: linear-gradient(to right, #282828, #fff, #282828);
   margin: 0;
   height: 100%;
 }

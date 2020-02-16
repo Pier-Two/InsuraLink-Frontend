@@ -161,7 +161,20 @@ class ContractsTable extends Component {
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
-                            
+                          <StyledTableRow>
+                                <StyledTableCell>Contract Duration (Minutes)</StyledTableCell>
+                                <StyledTableCell align="right">Bla (days)</StyledTableCell>
+                                <StyledTableCell align="right">Bla</StyledTableCell>
+                                <StyledTableCell align="right">Bla (%)</StyledTableCell>
+                                <StyledTableCell align="right">Bla (DAI)</StyledTableCell>
+                            </StyledTableRow>
+                            <StyledTableRow>
+                                <StyledTableCell>Contract Duration (Minutes)</StyledTableCell>
+                                <StyledTableCell align="right">Bla (days)</StyledTableCell>
+                                <StyledTableCell align="right">Bla</StyledTableCell>
+                                <StyledTableCell align="right">Bla (%)</StyledTableCell>
+                                <StyledTableCell align="right">Bla (DAI)</StyledTableCell>
+                            </StyledTableRow>
                         </TableBody>
                     </Table>
                 </div>
