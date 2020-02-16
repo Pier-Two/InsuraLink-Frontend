@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+  flex: 1 0 auto;
+  padding: 0;
+  background: rgb(40,40,40);
+}
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300&display=swap');
