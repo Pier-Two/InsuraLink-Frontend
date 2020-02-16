@@ -1,43 +1,55 @@
 import React from "react";
 import "react-step-progress-bar/styles.css";
-import { ProgressBar, Step } from "react-step-progress-bar";
-
+import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
+import insuralink from "../contracts/Insuralink.json";
+import contract_config from "../contract_config.json";
 
 class StepProgressBar extends React.Component {
+  state = {
+  }
+
+  getStatus = () => {
+    // var web3 = this.props.web3;
+    // var contract = new web3.eth.Contract(insuralink.abi, contract_config.insuralink_dev);
+    // console.log(contract.methods)
+    
+  }
+
+  componentDidMount = async () => {
+    var web3 = this.props.web3;
+    var contract = new web3.eth.Contract(insuralink.abi, contract_config.insuralink_dev);
+    var account = (await this.props.web3.eth.getAccounts())[0]
+    this.setState({web3: web3, contract: contract, account: account})
+    console.log(contract.methods)
+    contract.methods.activeContractsByUser(account)
+      .on((res) => {
+          //Set Status as pending and wait for this transaction to be processed
+          console.log(res);
+      });
+    // call create contract function //todo add in ability to set contract expiry time
+    //setInterval(this.getStatus, 10000)
+  }
+
   render() {
     return (
-      <ProgressBar
-        percent={10}
-        fillBackground="#796b4d"
-      >
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <img
-              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="30"
-              src="https://vignette.wikia.nocookie.net/pkmnshuffle/images/9/9d/Pichu.png/revision/latest?cb=20170407222851"
-            />
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <img
-              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="30"
-              src="https://vignette.wikia.nocookie.net/pkmnshuffle/images/9/97/Pikachu_%28Smiling%29.png/revision/latest?cb=20170410234508"
-            />
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <img
-              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="30"
-              src="https://orig00.deviantart.net/493a/f/2017/095/5/4/raichu_icon_by_pokemonshuffle_icons-db4ryym.png"
-            />
-          )}
-        </Step>
-      </ProgressBar>
+      <Progress
+        percent={this.props.percent}
+        theme={{
+          success: {
+            symbol: '🍕',
+            color: 'rgb(223, 105, 180)'
+          },
+          active: {
+            symbol: '🛵',
+            color: '#fbc630'
+          },
+          default: {
+            symbol: '👨‍🍳',
+            color: '#fbc630'
+          }
+        }}
+      />
     );
   }
 }

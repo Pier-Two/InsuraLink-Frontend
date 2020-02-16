@@ -15,7 +15,7 @@ class PizzaContractPage extends Component {
   }
 
   async componentDidMount() {
-    
+    console.log(this.props.web3)
   }
 
   handleClose = () => {
@@ -31,7 +31,7 @@ class PizzaContractPage extends Component {
           </Grid>
           <Grid container spacing={5} justify="center" alignItems="center" style={{paddingTop: "5%", width: '100%'}}>
             <Grid item xs style={{paddingLeft: "10%", height: '20vh'}}>
-                <TermDetails {...this.props} contractData={this.state.contractData} web3={this.props.web3}/>            
+                <TermDetails contractData={this.state.contractData} web3={this.props.web3}/>            
             </Grid>
             <Grid item xs={8} style={{height: '20vh'}}>
               <InputsTable/>
@@ -39,9 +39,8 @@ class PizzaContractPage extends Component {
           </Grid>
           <Grid container justify="center" alignItems="center" style={{ paddingTop: "20%", paddingLeft: "20%", height:"40vh", width: "80%"}}>
             <Grid item xs={12}>
-              <StepProgressBar/>
+              <StepProgressBar web3={this.props.web3}/>
             </Grid>
-            
           </Grid>
         </div>
       )
