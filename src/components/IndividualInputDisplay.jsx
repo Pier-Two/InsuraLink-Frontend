@@ -35,8 +35,8 @@ class InputsDisplay extends Component {
     render() {
             return (
                 <div>
-                    <Grid class="container" style={{ height: "50%", width: "50%"}}>
-                        <Grid class="row">
+                    <Grid className="container" style={{ height: "50%", width: "50%"}}>
+                        <Grid className="row">
                             <Grid>
                                 <Typography style={{color:"white"}}> {this.state.type} </Typography>
                                 <Circle data={this.state.mainRecord} />

@@ -43,9 +43,7 @@ class CustomAppBar extends Component {
                   <Typography variant="subtitle2"> Inputs </Typography>
                 </ListItem>
                 <ListItem className="link"> 
-                  <button style={{ color: "white", border: "none", backgroundColor: "#796b4d" }}
-                    data-dh-feature="network"
-                    data-dh-property-enable>
+                  <button style={{ color: "white", border: "none", backgroundColor: "#796b4d" }}>
                   Connect to Network
                   </button>
                 </ListItem>

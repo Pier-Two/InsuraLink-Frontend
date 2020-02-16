@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import {Typography, Button}  from '@material-ui/core';
+import { PulseLoader } from 'react-spinners';
 //import linkTRS from "../contracts/LinkTRS";
 //import contract_config from "../contract_config.json";
 import "../css/Grid.css";
@@ -25,13 +26,12 @@ class InputsDisplay extends Component {
         isLoaded: false
     }
 
-    get_data = async (url) => {
-        await fetch(url)
+    get_data = async () => {
+        await fetch(this.props.data)
         .then(res => res.json())
         .then(
             (result) => {
             var acc = "({0}, {1}, {2})".format(result.accelerometer.x, result.accelerometer.y, result.accelerometer.z)
-            console.log(acc)
             this.setState({
                 isLoaded: true,
                 results: result,
@@ -39,6 +39,7 @@ class InputsDisplay extends Component {
                 humidity: result.humidity,
                 accelerometer: acc
             });
+            console.log(result)
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -53,8 +54,9 @@ class InputsDisplay extends Component {
     }
 
     componentDidMount = async () => {
-        await this.get_data(this.props.data)
+        await this.get_data()
         console.log(this.state)
+        setInterval(this.get_data, 5000)
     }
     
 
@@ -66,23 +68,28 @@ class InputsDisplay extends Component {
     render() {
         if (!this.state.isLoaded) {
             return (
-                <div> Loading </div>
-            )
+                <PulseLoader
+                  sizeUnit={"px"}
+                  size={5}
+                  color={'#2A2B2A'}
+                  loading={this.state.showLoader}
+                />
+              )
         }
         else {
             return (
                 <div>
-                    <div class="grid2x2">
-                        <div class="box">
+                    <div className="grid2x2">
+                        <div className="box">
                             <IndividualInputDisplay type={"humidity"} data={this.state.humidity}/>
                         </div>
-                        <div class="box">
+                        <div className="box">
                             <IndividualInputDisplay type={"accelerometer"} data={this.state.accelerometer}/>
                         </div>
-                        <div class="box">
+                        <div className="box">
                             <IndividualInputDisplay type={"temp"} data={this.state.temp}/>
                         </div>
-                        <div class="box">
+                        <div className="box">
                             <IndividualInputDisplay type={"humidity"} data={this.state.humidity}/>
                         </div>
                     </div>

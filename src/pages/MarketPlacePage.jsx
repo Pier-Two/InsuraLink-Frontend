@@ -58,11 +58,32 @@ class MainPage extends Component {
     }
   }
 
+  componentDidMount = () => {
+    console.log(this.props)
+  }
+
   handleClose = () => {
     this.setState({ showPopup: false })
   }
 
   render() {
+    if (this.state.loading === true) {
+      return (
+        <PulseLoader
+          sizeUnit={"px"}
+          size={5}
+          color={'#2A2B2A'}
+          loading={this.state.showLoader}
+        />
+      )
+    } else if (this.state.loadError) {
+      return (
+        <div>
+          <Typography variant="h5" style={{ paddingTop: "5px", color: "#2A2B2A" }}> Sorry, there was an error loading in the contracts </Typography>
+          <Typography variant="h5" style={{ paddingTop: "5px", color: "#2A2B2A" }}> Please make sure you have metamask configured and are connected to the Ropsten test network</Typography>
+        </div>
+      )
+    } else {
       return (
         <div>
           <AppBar/>
@@ -91,6 +112,7 @@ class MainPage extends Component {
             </Grid>
         </div>
       )
+    }
   }
 }
 
