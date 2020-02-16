@@ -56,7 +56,7 @@ class InputsDisplay extends Component {
                 <div>
                     <Grid className="container" alignItems="inline" style={{ height: "100%", width: "100%"}}>
                         
-                        <Circle data={this.props.data} />
+                        <Circle image={this.props.image} data={this.props.data} />
                         <div style={{float: "right", paddingRight: "20%"}}>
                             <div style={{ flexDirection: 'column', display: 'flex', alignItem:'flex-start', marginLeft: '10px', marginBottom: '15px'}}>
                                 <Typography style={{color: "white"}}> {this.state.type} </Typography>

@@ -13,6 +13,10 @@ import { PulseLoader } from 'react-spinners';
 import "../css/Grid.css";
 import IndividualInputDisplay from './IndividualInputDisplay';
 
+import jellyfish from '../img/jellyfish.png'
+import hardware from '../img/chip.png'
+
+
 class InputsDisplay extends Component {
     state = {
         isLoaded: false,
@@ -70,16 +74,16 @@ class InputsDisplay extends Component {
                 <div>
                     <div className="grid2x2">
                         <div className="box">
-                            <IndividualInputDisplay type={"Humidity"} data={this.state.humidity}/>
+                            <IndividualInputDisplay image={jellyfish} type={"Humidity"} data={this.state.humidity}/>
                         </div>
                         <div className="box">
-                            <IndividualInputDisplay type={"Tilt"} data={this.state.tilt}/>
+                            <IndividualInputDisplay image={hardware} type={"Tilt"} data={this.state.tilt}/>
                         </div>
                         <div className="box">
-                            <IndividualInputDisplay type={"Temperature (deg)"} data={this.state.temp}/>
+                            <IndividualInputDisplay image={hardware} type={"Temperature (deg)"} data={this.state.temp}/>
                         </div>
                         <div className="box">
-                            <IndividualInputDisplay type={"Judge Happiness (%)"} data={100}/>
+                            <IndividualInputDisplay image={jellyfish} type={"Judge Happiness (%)"} data={100}/>
                         </div>
                     </div>
                 </div>
