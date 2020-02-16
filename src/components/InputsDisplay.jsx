@@ -77,14 +77,12 @@ class InputsDisplay extends Component {
                             <IndividualInputDisplay image={jellyfish} type={"Humidity"} data={this.state.humidity}/>
                         </div>
                         <div className="box">
-                            <IndividualInputDisplay image={hardware} type={"Tilt"} data={this.state.tilt}/>
+                            <IndividualInputDisplay image={jellyfish} type={"Tilt"} data={this.state.tilt}/>
                         </div>
-                        <div className="box">
-                            <IndividualInputDisplay image={hardware} type={"Temperature (deg)"} data={this.state.temp}/>
+                        <div className="box" style={{paddingLeft: "25%"}}>
+                            <IndividualInputDisplay image={hardware} type={"Temperature (°C)"} data={this.state.temp}/>
                         </div>
-                        <div className="box">
-                            <IndividualInputDisplay image={jellyfish} type={"Judge Happiness (%)"} data={100}/>
-                        </div>
+                        
                     </div>
                 </div>
             );

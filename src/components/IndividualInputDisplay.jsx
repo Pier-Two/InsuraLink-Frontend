@@ -58,10 +58,10 @@ class InputsDisplay extends Component {
                         
                         <Circle image={this.props.image} data={this.props.data} />
                         <div style={{float: "right", paddingRight: "20%"}}>
-                            <div style={{ flexDirection: 'column', display: 'flex', alignItem:'flex-start', marginLeft: '10px', marginBottom: '15px'}}>
+                            <div style={{ flexDirection: 'column', display: 'flex', marginBottom: '15px'}}>
                                 <Typography style={{color: "white"}}> {this.state.type} </Typography>
                             </div>
-                            <Table className="table" aria-label="customized table">
+                            <Table style={{width:"10%"}}className="table" aria-label="customized table">
                             <TableHead className="table-head">
                                 <StyledTableRow>
                                     <StyledTableCell>Historical</StyledTableCell>
