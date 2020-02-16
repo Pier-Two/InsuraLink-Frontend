@@ -10,6 +10,7 @@ import { PulseLoader } from 'react-spinners';
 //import linkTRS from "../contracts/LinkTRS";
 //import contract_config from "../contract_config.json";
 import "../css/Table.css";
+import { red } from '@material-ui/core/colors';
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -31,9 +32,14 @@ const StyledTableRow = withStyles(theme => ({
 class InputsTable extends Component {
     state = {
         isLoaded: false,
+        tilt: 0,
+        temp: 0,
+        humidity: 0,
+
     }
 
     get_data = async () => {
+        console.log("Getting data")
         await fetch(this.props.data)
         .then(res => res.json())
         .then(
@@ -55,16 +61,54 @@ class InputsTable extends Component {
                 isLoaded: true,
                 error: true
             });
+            console.log(error)
             }
         )
     }
 
     componentDidMount = async () => {
+        console.log("Table mounted")
         await this.get_data()
         console.log(this.state)
         setInterval(this.get_data, 5000)
     }
 
+    //The following hurts
+    calcTempStatus = (currentTemp) => {
+        if (currentTemp < 15) {
+            return(
+                <Typography style={{color: red}}> Fired </Typography>
+            )
+        } else {
+            return(
+                <Typography> OK </Typography>
+            )
+        }
+    }
+
+    calcHumidityStatus = (currentHumidity) => {
+        if (currentHumidity < 10) {
+            return(
+                <Typography style={{color: red}}> Fired </Typography>
+            )
+        } else {
+            return(
+                <Typography> OK </Typography>
+            )
+        }
+    }
+
+    calcTiltStatus = (currentTilt) => {
+        if (currentTilt > 45) {
+            return(
+                <Typography style={{color: red}}> Fired </Typography>
+            )
+        } else {
+            return(
+                <Typography> OK </Typography>
+            )
+        }
+    }
 
     render() {
         if (!this.state.isLoaded) {
@@ -95,26 +139,20 @@ class InputsTable extends Component {
                             <StyledTableRow>
                                 <StyledTableCell>Tilt</StyledTableCell>
                                 <StyledTableCell align="right">{this.state.tilt}</StyledTableCell>
-                                <StyledTableCell align="right">Threshold</StyledTableCell>
-                                <StyledTableCell align="right">{this.state.tiltStatus}</StyledTableCell>
+                                <StyledTableCell align="right"> {"< 45 degrees"}</StyledTableCell>
+                                <StyledTableCell align="right">{this.calcTiltStatus(this.state.tilt)}</StyledTableCell>
                             </StyledTableRow>
                             <StyledTableRow>
                                 <StyledTableCell>Temperature</StyledTableCell>
                                 <StyledTableCell align="right">{this.state.temp}</StyledTableCell>
-                                <StyledTableCell align="right">Threshold</StyledTableCell>
-                                <StyledTableCell align="right">{this.state.tempStatus}</StyledTableCell>
+                                <StyledTableCell align="right"> {"> 15C"}</StyledTableCell>
+                                <StyledTableCell align="right">{this.calcTempStatus(this.state.temp)}</StyledTableCell>
                             </StyledTableRow>
                             <StyledTableRow>
                                 <StyledTableCell>Humidity</StyledTableCell>
                                 <StyledTableCell align="right">{this.state.humidity}</StyledTableCell>
-                                <StyledTableCell align="right">Threshold</StyledTableCell>
-                                <StyledTableCell align="right">{this.state.humidityStatus}</StyledTableCell>
-                            </StyledTableRow>
-                            <StyledTableRow>
-                                <StyledTableCell>Sensor_X</StyledTableCell>
-                                <StyledTableCell align="right">Current Value_X</StyledTableCell>
-                                <StyledTableCell align="right">Threshold_X</StyledTableCell>
-                                <StyledTableCell align="right">Status_X</StyledTableCell>
+                                <StyledTableCell align="right"> {"> 10%"}</StyledTableCell>
+                                <StyledTableCell align="right">{this.calcHumidityStatus(this.state.humidity)}</StyledTableCell>
                             </StyledTableRow>
                         </TableBody>
                     </Table>

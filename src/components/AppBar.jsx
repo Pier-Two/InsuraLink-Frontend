@@ -42,11 +42,6 @@ class CustomAppBar extends Component {
                 <ListItem label="Inputs" to='/inputs' component={Link} className = "link">
                   <Typography variant="subtitle2"> Inputs </Typography>
                 </ListItem>
-                <ListItem className="link"> 
-                  <button style={{ color: "white", border: "none", backgroundColor: "#caaf72" }}>
-                  Connect to Network
-                  </button>
-                </ListItem>
               </List>
             </Toolbar>
         </AppBar>
