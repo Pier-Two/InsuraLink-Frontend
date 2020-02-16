@@ -4,7 +4,7 @@ import { FormControl, Paper, Button, Typography } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Link } from "react-router-dom";
 import { validateForm } from './validator';
-import insuralink from "../../contracts/Insuralink";
+import insuralink from "../../contracts/Insuralink.json";
 import contract_config from "../../contract_config.json";
 
 
@@ -14,10 +14,11 @@ class CreateContractForm extends Component {
 
     state = {
         //TODO add in all required submissions users will need to make
-        freq: "",
+        validLength: 0,
         pAmount: "",
         iAmount: "",
         total: "",
+        description: "pizza contract",
         errors: {
             errorsObj: {},
             hasError: false
@@ -27,8 +28,8 @@ class CreateContractForm extends Component {
     componentDidMount = async () => {
     }
 
-    onFrequencyChange = (event) => {
-        this.setState({ freq: event.target.value })
+    onValidLengthChange = (event) => {
+        this.setState({ validLength: event.target.value })
     }
 
     onPaymentChange = (event) => {
@@ -49,10 +50,11 @@ class CreateContractForm extends Component {
         var contract = new web3.eth.Contract(insuralink.abi, contract_config.insuralink_dev);
         console.log(contract)
         var account = (await this.props.web3.eth.getAccounts())[0]
+        console.log(contract.methods)
 
         // call create contract function //todo add in ability to set contract expiry time
-        contract.methods.createContract(this.state.freq, this.state.pAmount, this.state.iAmount,
-            this.total).send({ from: account })
+        contract.methods.createInsuranceContractTemplate(1, this.state.pAmount, this.state.iAmount,
+            this.state.validLength, this.state.description ,this.state.total).send({ from: account })
             .on('transactionHash', (hash) => {
                 //Set Status as pending and wait for this transaction to be processed
                 console.log(hash);
@@ -61,6 +63,7 @@ class CreateContractForm extends Component {
                         console.log(err)
                     }
                     console.log(result)
+                    alert("Transaction Submitted")
                 })
             });
     }
@@ -80,10 +83,10 @@ class CreateContractForm extends Component {
                                 required
                                 fullWidth
                                 id="freq"
-                                label="Payment Frequency"
+                                label="Validity (Minutes)"
                                 name="freq"
                                 autoFocus
-                                onChange={this.onFrequencyChange}
+                                onChange={this.onValidLengthChange}
                                 value={this.state.freq}
                                 style={this.textFieldStyle}
                             />
@@ -96,7 +99,7 @@ class CreateContractForm extends Component {
                                 label="Payment Amount"
                                 name="pAmount"
                                 autoFocus
-                                onChange={this.onPaymentAmountChange}
+                                onChange={this.onPaymentChange}
                                 value={this.state.pAmount}
                                 style={this.textFieldStyle}
                             />
@@ -127,8 +130,20 @@ class CreateContractForm extends Component {
                                 value={this.state.total}
                                 style={this.textFieldStyle}
                             />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="total"
+                                label="Description"
+                                name="total"
+                                autoFocus
+                                value={this.state.description}
+                                style={this.textFieldStyle}
+                            />
                         </form>
-                        <Button variant="contained" color="primary" onClick={this.completeForm}  to='/confirmation' component={Link} style={{ margin: "5px" }}>
+                        <Button variant="contained" color="primary" onClick={this.completeForm} component={Link} style={{ margin: "5px" }}>
                             Submit
                         </Button>
                     </FormControl>

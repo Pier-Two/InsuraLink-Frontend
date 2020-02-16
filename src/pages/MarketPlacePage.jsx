@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import AppBar from "../components/AppBar";
 import TermDetails from "../components/TermDetails"
 import ContractsTable from "../components/ContractsTable"
-
 // import linkTRS from "../contracts/LinkTRS";
 // import token from "../contracts/TestDAI";
 // import demoAggregator from "../contracts/DemoAggregator";
@@ -14,6 +13,9 @@ import '../App.css';
 //tree graph stuff
 import 'react-tree-graph/dist/style.css'
 import Tree from 'react-tree-graph';
+import contactMail from "material-ui/svg-icons/communication/contact-mail";
+import insuralink from "../../contracts/Insuralink.json";
+import contract_config from "../../contract_config.json";
 
 let data = {
 	name: 'Insuralink Contracts',
@@ -61,6 +63,23 @@ class MainPage extends Component {
   componentDidMount = () => {
     console.log(this.props)
   }
+
+  getOpenContractTemplates = async () => {
+    var web3 = this.props.web3;
+    var contract = new web3.eth.Contract(insuralink.abi, contract_config.insuralink_dev);
+    var account = (await this.props.web3.eth.getAccounts())[0]
+
+    var numberOfTemplates = await contract.methods.templateCounter().call()
+    var templates = []
+    for (var i = 0; i < numberOfTemplates; i++) {
+      var thisTemplate = await contract.methods.getContractTemplate(i).call()
+      if (thisTemplate[4] < Math.round((new Date()).getTime() / 1000)) {
+        //Activre template
+        templates.push(thisTemplate)
+      }
+    }
+  }
+
 
   handleClose = () => {
     this.setState({ showPopup: false })
