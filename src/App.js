@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import MainPage from "./pages/MainPage";
 import NotFoundPage from "./pages/404";
-import PizzaContractPage from "./pages/PizzaContractPage";
-import CreateContractPage from "./pages/CreateContractPage"
-import MarketPlacePage from "./pages/MarketPlacePage";
-import InputsDisplayPage from "./pages/InputsDisplayPage";
 import './App.css';
 import Typography from '@material-ui/core/Typography';
 import { PulseLoader } from 'react-spinners';
 
-import getWeb3 from './utils/getWeb3'
 
 class App extends Component {
   state = {
@@ -20,26 +15,7 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    try {
-      // Get network provider and web3 instance.
-      const web3 = await getWeb3();
-      // this.setState({ loading :false, web3: web3 })
-      // const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-      // web3.eth.getAccounts().then(console.log);
-      //const ethers = getEthers(web3)
-      // console.log(ethers)
-      // console.log(ethers.getDefaultProvider)
-      console.log(web3)
-      this.setState({ loading :false, web3: web3 })
-
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      // alert(
-      //   `Failed to load web3, accounts, or contract. Check console for details.`,
-      // );
-      this.setState({ loadError: true, loading: false })
-      console.error(error);
-    }
+    
   }
 
   render() {
@@ -64,22 +40,10 @@ class App extends Component {
         <div className="App" style={{ height: '100vh' }}>
             <Switch>
               <Route exact path="/" render={(props) => {
-                return (<MainPage {...props} web3={this.state.web3} />)
-              }} />
-              <Route exact path="/pizza" render={(props) => {
-                return (<PizzaContractPage {...props} web3={this.state.web3}/>)
-              }} />
-              <Route exact path="/inputs" render={(props) => {
-                return (<InputsDisplayPage {...props} />)
-              }} />
-              <Route exact path="/marketplace" render={(props) => {
-                return (<MarketPlacePage {...props} web3={this.state.web3} />)
-              }} />
-              <Route exact path="/create" render={(props) => {
-                return (<CreateContractPage {...props} web3={this.state.web3}/>)
+                return (<MainPage />)
               }} />
               <Route render={(props) => {
-                return (<NotFoundPage {...props} />)
+                return (<NotFoundPage />)
               }} />
             </Switch>
           </div>
