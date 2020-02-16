@@ -34,7 +34,7 @@ class PizzaContractPage extends Component {
                 <TermDetails {...this.props} contractData={this.state.contractData} web3={this.props.web3}/>            
             </Grid>
             <Grid item xs={8} style={{height: '20vh'}}>
-              <InputsTable/>
+              <InputsTable data={"http://10.0.1.13"}/>
             </Grid>
           </Grid>
           <Grid container justify="center" alignItems="center" style={{ paddingTop: "20%", paddingLeft: "20%", height:"40vh", width: "80%"}}>
