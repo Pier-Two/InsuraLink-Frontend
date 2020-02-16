@@ -29,6 +29,7 @@ class App extends Component {
       //const ethers = getEthers(web3)
       // console.log(ethers)
       // console.log(ethers.getDefaultProvider)
+      console.log(web3)
       this.setState({ loading :false, web3: web3 })
 
     } catch (error) {

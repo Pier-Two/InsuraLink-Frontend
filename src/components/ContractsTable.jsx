@@ -153,28 +153,27 @@ class ContractsTable extends Component {
                     <Table className="table" aria-label="customized table">
                         <TableHead className="table-head">
                             <StyledTableRow>
-                                <StyledTableCell>Contract Duration (Minutes)</StyledTableCell>
-                                <StyledTableCell align="right">Bla (days)</StyledTableCell>
-                                <StyledTableCell align="right">Bla</StyledTableCell>
-                                <StyledTableCell align="right">Bla (%)</StyledTableCell>
-                                <StyledTableCell align="right">Bla (DAI)</StyledTableCell>
+                                <StyledTableCell>Valid Until (Minutes)</StyledTableCell>
+                                <StyledTableCell align="right">Description</StyledTableCell>
+                                <StyledTableCell align="right">Payment Amount</StyledTableCell>
+                                <StyledTableCell align="right">Number of Payments</StyledTableCell>
+                                <StyledTableCell align="right">Insurance Amount</StyledTableCell>
                             </StyledTableRow>
                         </TableHead>
                         <TableBody>
-                          <StyledTableRow>
-                                <StyledTableCell>Contract Duration (Minutes)</StyledTableCell>
-                                <StyledTableCell align="right">Bla (days)</StyledTableCell>
-                                <StyledTableCell align="right">Bla</StyledTableCell>
-                                <StyledTableCell align="right">Bla (%)</StyledTableCell>
-                                <StyledTableCell align="right">Bla (DAI)</StyledTableCell>
-                            </StyledTableRow>
-                            <StyledTableRow>
-                                <StyledTableCell>Contract Duration (Minutes)</StyledTableCell>
-                                <StyledTableCell align="right">Bla (days)</StyledTableCell>
-                                <StyledTableCell align="right">Bla</StyledTableCell>
-                                <StyledTableCell align="right">Bla (%)</StyledTableCell>
-                                <StyledTableCell align="right">Bla (DAI)</StyledTableCell>
-                            </StyledTableRow>
+                            {this.props.templateData.map(row => (
+                                <StyledTableRow onMouseOver={() => {
+                                  this.props.onContractClicked(row)
+                                }}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row[4]}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">{row[5]}</StyledTableCell>
+                                    <StyledTableCell align="right">{this.props.web3.utils.fromWei(row[2])}</StyledTableCell>
+                                    <StyledTableCell align="right">{row[1]}</StyledTableCell>
+                                    <StyledTableCell align="right">{this.props.web3.utils.fromWei(row[3])}</StyledTableCell>
+                                </StyledTableRow>
+                            ))}
                         </TableBody>
                     </Table>
                 </div>
