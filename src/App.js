@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import MainPage from "./pages/MainPage";
+import SubmissionPage from "./pages/SubmissionPage";
 import NotFoundPage from "./pages/404";
 import './App.css';
 import Typography from '@material-ui/core/Typography';
@@ -41,6 +42,9 @@ class App extends Component {
             <Switch>
               <Route exact path="/" render={(props) => {
                 return (<MainPage />)
+              }} />
+              <Route exact path="/submission" render={(props) => {
+                return (<SubmissionPage />)
               }} />
               <Route render={(props) => {
                 return (<NotFoundPage />)

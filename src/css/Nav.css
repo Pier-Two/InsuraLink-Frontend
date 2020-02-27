@@ -12,3 +12,7 @@
     color: white;
     font-size: 11px;
   }
+
+  .link:hover {
+    color: #adadad;
+  }
